@@ -1,0 +1,37 @@
+buildscript {
+    ext.android_tools_version = '3.0.1'
+    ext.kotlin_version = '1.2.20'
+    ext.junit_version = '4.12'
+
+    repositories {
+        jcenter()
+        google()
+    }
+    dependencies {
+        classpath "com.android.tools.build:gradle:$android_tools_version"
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+    }
+}
+allprojects {
+    repositories {
+        jcenter()
+    }
+}
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+
+android {
+    compileSdkVersion 26
+    sourceSets {
+        main.java.srcDirs += 'src/main/kotlin'
+        test.java.srcDirs += 'src/test/kotlin'
+    }
+}
+dependencies {
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+    testImplementation "junit:junit:$junit_version"
+}
+
+task wrapper(type: Wrapper) {
+    gradleVersion = '4.1'
+}
